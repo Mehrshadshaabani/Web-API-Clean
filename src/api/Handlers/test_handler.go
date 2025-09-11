@@ -1,6 +1,9 @@
 package handlers
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/Mehrshadshaabani/Web-API-Clean/api/helper"
+	"github.com/gin-gonic/gin"
+)
 
 type testhandler struct {
 }
@@ -22,28 +25,17 @@ func (h *testhandler) Createuser(c *gin.Context) {
 }
 
 func (h *testhandler) GetAllUsers(c *gin.Context) {
-	c.JSON(200, gin.H{
-		"message": "Get all users successful",
-	})
+	c.JSON(200, helper.GenerateBaseHttpResponse("get all users", true, 200))
 }
 func (h *testhandler) GetuserbyId(c *gin.Context) {
 	id := c.Param("id")
-	c.JSON(200, gin.H{
-		"message": "Get user by ID successful",
-		"id":      id,
-	})
+	c.JSON(200, helper.GenerateBaseHttpResponse("get user by id "+id, true, 200))
 }
 func (h *testhandler) Headerbinder(c *gin.Context) {
 	header := c.GetHeader("X-Custom-Header")
 	if header == "12345678" {
-		c.JSON(200, gin.H{
-			"message": "Header bound successfully",
-			"header":  header,
-		})
+		c.JSON(200, helper.GenerateBaseHttpResponse("header bound successfully", true, 200))
 	} else {
-		c.JSON(400, gin.H{
-			"message": "error",
-		})
+		c.JSON(400, helper.GenerateBaseHttpResponse("error", false, 400))
 	}
-
 }

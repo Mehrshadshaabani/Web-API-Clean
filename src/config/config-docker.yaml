@@ -31,3 +31,10 @@ redis:
   poolSize: 10
   poolTimeout: 15
   idleCheckFrequency: 500
+password:
+  includeChars: true
+  excludeDigits: true
+  minLength: 8
+  maxLength: 64
+  includeUppercase: true
+  includeLowercase: true
