@@ -8,10 +8,10 @@ import (
 	"github.com/go-redis/redis/v8"
 )
 
-var RedisClient *redis.Client
+var redisClient *redis.Client
 
-func InitRedis(cfg *config.Config) {
-	RedisClient = redis.NewClient(&redis.Options{
+func InitRedis(cfg *config.Config) error {
+	redisClient = redis.NewClient(&redis.Options{
 		Addr:               fmt.Sprintf("%s:%s", cfg.Redis.Host, cfg.Redis.Port),
 		Password:           cfg.Redis.Password,
 		DB:                 0,
@@ -19,16 +19,18 @@ func InitRedis(cfg *config.Config) {
 		ReadTimeout:        cfg.Redis.ReadTimeout * time.Second,
 		WriteTimeout:       cfg.Redis.WriteTimeout * time.Second,
 		PoolSize:           cfg.Redis.PoolSize,
-		PoolTimeout:        cfg.Redis.PoolTimeout * time.Second,
+		PoolTimeout:        cfg.Redis.PoolTimeout,
 		IdleTimeout:        500 * time.Millisecond,
-		IdleCheckFrequency: cfg.Redis.IdleCheckFrequency * time.Second,
+		IdleCheckFrequency: cfg.Redis.IdleCheckFrequency * time.Millisecond,
 	})
+
+	return nil
 }
 
-func GetRedisClient() *redis.Client {
-	return RedisClient
+func GetRedis() *redis.Client {
+	return redisClient
 }
 
-func CloseRedisClient() error {
-	return RedisClient.Close()
+func CloseRedis() {
+	redisClient.Close()
 }

@@ -1,13 +1,13 @@
 server:
-  internalPort: 5000
-  externalPort: 0
+  internalPort: 5005
+  externalPort: 5005
   runMode: release
   domain: localhost
 logger:
-  filePath: /app/logs/
+  filePath: ../logs/logs.log
   encoding: json
   level: debug
-  logger: zap
+  logger: zerolog
 cors:
   allowOrigins: "*"
 postgres:

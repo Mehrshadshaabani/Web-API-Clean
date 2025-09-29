@@ -1,0 +1,37 @@
+definitions:
+  handlers.Person:
+    properties:
+      age:
+        type: integer
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /health:
+    post:
+      consumes:
+      - application/json
+      description: Binds JSON body to a Person, appends to persons slice, and returns
+        the person data.
+      parameters:
+      - description: Person data
+        in: body
+        name: person
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.Person'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.Person'
+      summary: Health check and add person
+      tags:
+      - health
+swagger: "2.0"

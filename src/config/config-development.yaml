@@ -4,15 +4,15 @@ server:
   runMode: debug
   domain: localhost
 logger:
-  filePath: ../logs/
+  filePath: ../logs/logs.log
   encoding: json
   level: debug
-  logger: zap
+  logger: zerolog
 cors:
   allowOrigins: "*"
 postgres:
   host: localhost
-  port: 5432
+  port: 5442
   user: postgres
   password: admin
   dbName: car_sale_db
@@ -22,7 +22,7 @@ postgres:
   connMaxLifetime: 5
 redis:
   host: localhost
-  port: 6380
+  port: 6597
   password: password
   db: 0
   dialTimeout: 5
